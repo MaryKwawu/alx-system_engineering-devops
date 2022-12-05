@@ -4,3 +4,4 @@ Display the content of the /etc/passwd file.
 Display the content of /etc/passwd and /etc/hosts
 Last lines of a file
 I'd prefer the first ones actually
+Write a script that displays the third line of the file iacta.
