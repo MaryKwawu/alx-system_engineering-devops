@@ -9,3 +9,4 @@ oks into when looking for a program.
  6.Create a script that creates a new local variable.
  7.Create a script that creates a new global variable. Name: BEST Value: School
 8.Every addition to true knowledge is an addition to human power
+9. Write a script that prints the result of POWER divided by DIVIDE, followed by a new line.
