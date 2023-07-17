@@ -1,7 +1,10 @@
+sudo apt-get update
+sudo apt-get install ufw -y
 ufw --force reset
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow 22/tcp
 ufw allow 443/tcp
 ufw allow 80/tcp
+ufw --force enable
 ufw route allow in on eth0 out on eth0 to any port 8080 proto tcp forward to any port 80

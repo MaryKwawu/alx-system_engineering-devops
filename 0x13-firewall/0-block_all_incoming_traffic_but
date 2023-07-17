@@ -1,5 +1,5 @@
-sudo apt update
-sudo apt install ufw
+sudo apt-get update
+sudo apt-get install ufw -y
 ufw --force reset
 ufw default deny incoming
 ufw default allow outgoing
