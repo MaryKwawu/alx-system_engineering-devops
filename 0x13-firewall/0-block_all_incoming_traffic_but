@@ -1,4 +1,5 @@
 sudo apt-get update
+sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
 sudo apt-get install ufw -y
 ufw --force reset
 ufw default deny incoming
