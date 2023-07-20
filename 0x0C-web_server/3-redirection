@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define the source and destination URLs for the redirect
 source_url="/redirect_me"
