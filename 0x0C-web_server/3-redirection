@@ -1,30 +1,36 @@
-#!/usr/bin/env bash
-# Installs, configures, and starts the server
-apt-get update
-apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-mkdir -p /var/www/html/
-sudo chmod -R 755 /var/www
-echo 'Hello World!' > /var/www/html/index.html
-SERVER_CONFIG=\
-"server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-	index index.html index.htm index.nginx-debian.html;
-	server_name _;
-	location / {
-		try_files \$uri \$uri/ =404;
-	}
-	if (\$request_filename ~ redirect_me){
-		rewrite ^ https://sketchfab.com/bluepeno/models permanent;
-	}
-}"
+#!/bin/bash
 
-bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+# Define the source and destination URLs for the redirect
+source_url="/redirect_me"
+destination_url="https://www.newurl.com"
 
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-	service nginx start
-else
-	service nginx restart
+# Define the Nginx configuration file path
+nginx_config_file="/etc/nginx/sites-available/default"
+
+# Check if the Nginx configuration file exists
+if [ ! -f "$nginx_config_file" ]; then
+    echo "Error: Nginx configuration file not found. Please adjust the file path if necessary."
+    exit 1
 fi
+
+# Check if the redirect location block already exists in the configuration file
+if grep -q "location $source_url" "$nginx_config_file"; then
+    echo "Error: Redirect location block already exists in the Nginx configuration file."
+    exit 1
+fi
+
+# Add the redirect location block to the Nginx configuration file
+sudo sed -i "/server {/a \ \ \ \ location $source_url { return 301 $destination_url\$request_uri; }" "$nginx_config_file"
+
+# Test the Nginx configuration for syntax errors
+sudo nginx -t
+
+# Check if the configuration test is successful
+if [ $? -eq 0 ]; then
+    # Reload Nginx to apply the changes
+    sudo systemctl reload nginx
+    echo "Nginx configuration updated. Redirect from '$source_url' to '$destination_url' is now active."
+else
+    echo "Error: Nginx configuration test failed. Please check the configuration file for syntax errors."
+fi
+
