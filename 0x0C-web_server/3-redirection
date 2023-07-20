@@ -2,7 +2,7 @@
 
 # Define the source and destination URLs for the redirect
 source_url="/redirect_me"
-destination_url="https://www.newurl.com"
+destination_url="https://www.youtube.com/watch?v=QH2-TGUlwu4"
 
 # Define the Nginx configuration file path
 nginx_config_file="/etc/nginx/sites-available/default"
@@ -28,7 +28,7 @@ sudo nginx -t
 # Check if the configuration test is successful
 if [ $? -eq 0 ]; then
     # Reload Nginx to apply the changes
-    sudo systemctl reload nginx
+   service nginx start
     echo "Nginx configuration updated. Redirect from '$source_url' to '$destination_url' is now active."
 else
     echo "Error: Nginx configuration test failed. Please check the configuration file for syntax errors."
