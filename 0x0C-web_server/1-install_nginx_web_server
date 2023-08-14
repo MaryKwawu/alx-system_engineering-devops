@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 # installs nginx and configures it on a remote server
 
-apt-get -y update
-apt-get -y install nginx ufw
-ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /usr/share/nginx/html/index.html
-service nginx start
+sudo apt-get update
+sudo apt-get install nginx -y
+
+sudo bash -c "cat > /etc/nginx/conf.d/default.conf" <<EOF
+server {
+	listen 80;
+	server_name localhost;
+
+	location / {
+		return 200 'Hello World';
+	}
+}
+EOF
+
+sudo service nginx restart
 curl http://localhost:80/
