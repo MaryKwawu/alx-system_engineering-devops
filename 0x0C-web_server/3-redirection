@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#Configure Nginx server so that /redirect_me is redirecting to another page.
 
 # Define the source and destination URLs for the redirect
 source_url="/redirect_me"
