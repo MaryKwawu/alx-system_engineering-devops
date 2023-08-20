@@ -1,3 +1,4 @@
+#Puppet-lint" is a command-line tool used for checking and enforcing style and best practice guidelines for writing Puppet code.
 # Increases the amount of traffic an Nginx server can handle.
 
 # Increase the ULIMIT of the default file
