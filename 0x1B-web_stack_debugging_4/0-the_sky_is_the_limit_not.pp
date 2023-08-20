@@ -1,4 +1,7 @@
-#Puppet-lint" is a command-line tool used for checking and enforcing style and best practice guidelines for writing Puppet code.
+#Puppet Manifest:0x1B-web_stack_debugging_4
+
+# Description: This Puppet script configures the settings and resources
+
 # Increases the amount of traffic an Nginx server can handle.
 
 # Increase the ULIMIT of the default file
